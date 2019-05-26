@@ -74,17 +74,15 @@ def add_snippet_page(request):
             messages.add_message(request, messages.SUCCESS,
                                  "Сниппет успешно добавлен")
             return redirect('view_snippet', snippet_id=record.id)
-        else:
-            messages.add_message(request, messages.ERROR,
-                                 "Некорректные данные в форме")
-            return redirect('add_snippet')
-    else:
-        context['addform'] = BaseSnippetForm(
-            initial={
-                'user': request.user.username,
-            }
-        )
-        return render(request, 'pages/add_snippet.html', context)
+        messages.add_message(request, messages.ERROR,
+                             "Некорректные данные в форме")
+        return redirect('add_snippet')
+    context['addform'] = BaseSnippetForm(
+        initial={
+            'user': request.user.username,
+        }
+    )
+    return render(request, 'pages/add_snippet.html', context)
 
 
 @login_required(login_url='/login/')

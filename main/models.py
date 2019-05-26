@@ -43,8 +43,8 @@ class Snippet(models.Model):
 
         :return: хеш в виде строки
         """
-        h = hashlib.sha1(self.code.encode('utf8'))
-        return h.hexdigest()
+        hash_result = hashlib.sha1(self.code.encode('utf8'))
+        return hash_result.hexdigest()
 
     def get_sha256(self):
         """
@@ -54,8 +54,8 @@ class Snippet(models.Model):
 
         :return: хеш в виде строки
         """
-        h = hashlib.sha256(self.code.encode('utf8'))
-        return h.hexdigest()
+        hash_result = hashlib.sha256(self.code.encode('utf8'))
+        return hash_result.hexdigest()
 
     def get_md5(self):
         """
@@ -65,8 +65,8 @@ class Snippet(models.Model):
 
         :return: хеш в виде строки
         """
-        h = hashlib.md5(self.code.encode('utf8'))
-        return h.hexdigest()
+        hash_result = hashlib.md5(self.code.encode('utf8'))
+        return hash_result.hexdigest()
 
     def get_filename(self, modifier=None):
         """
@@ -102,8 +102,8 @@ class Snippet(models.Model):
         path = self.get_filename(modifier)
         if not code:
             code = self.code
-        with open(path, 'w') as f:
-            f.write(code.replace('\r\n', '\n'))
+        with open(path, 'w') as this_file:
+            this_file.write(code.replace('\r\n', '\n'))
 
     def get_code(self):
         """
@@ -113,8 +113,8 @@ class Snippet(models.Model):
         """
         if not os.path.exists(self.get_filename()):
             raise self.DoesNotExist
-        with open(self.get_filename(), 'r') as f:
-            data = f.read()
+        with open(self.get_filename(), 'r') as this_file:
+            data = this_file.read()
         return data
 
     def get_formatted_code(self, utility):
