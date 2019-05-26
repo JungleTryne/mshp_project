@@ -15,6 +15,7 @@
 <div class="col8 ml-3">
     <a href="{% url 'view_format' record.id 'pep8' %}" class="btn btn-primary">pep8</a>
     <a href="{% url 'view_format' record.id 'docformatter' %}" class="btn btn-success">docformatter</a>
+    <a href="{% url 'view_format' record.id 'unify' %}" class="btn btn-warning">unify</a>
     <a href="{% url 'view_format' record.id 'autoflake' %}" class="btn btn-danger">autoflake</a>
 </div>
 {% endblock %}
